@@ -1,4 +1,14 @@
-import { createAuthClient } from "better-auth/react"
-export const authClient = createAuthClient()
-
-export const { signIn, signUp, useSession } = authClient
+export const auth = betterAuth({
+  database: mongodbAdapter(db, {
+    client,
+  }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    },
+  },
+});
